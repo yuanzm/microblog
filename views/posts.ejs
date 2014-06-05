@@ -1,0 +1,16 @@
+<% posts.forEach(function(post, index) {
+	if (index % 3 == 0) { %>
+	<div class="row">
+		<%} %>
+		<div class="span4">
+			<h2><a href="/u/<%= post.user %>"><%= post.user %></a> 说</h2>
+			<p><small><%= post.time %></small></p>
+			<p><%= post.post %></p>
+		</div>
+		<% if (index % 3 == 2) { %>
+	</div><!-- end row -->
+	<% } %>
+	<%}) %>
+	<% if (posts.length % 3 != 0) { %>
+</div><!-- end row -->
+<%} %>

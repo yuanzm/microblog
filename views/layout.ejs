@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+	
+	<link rel='stylesheet' href='/stylesheets/bootstrap.css' />
+	<style type="text/css">
+		body {
+			padding-top: 60px;
+			padding-bottom: 40px;
+		}
+	</style>
+	<link href="stylesheets/bootstrap-responsive.css" rel="stylesheet">
+</head>
+<body>
+	<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</a>
+				<a class="brand" href="/">Microblog</a>
+				<div class="nav-collapse">
+					<ul class="nav">
+						<li class="active"><a href="/">首页</a></li>
+						<% if (!user) { %>
+						<li><a href="/login">登入</a></li>
+						<li><a href="/reg">注册</a></li>
+						<% } else { %>
+						<li><a href="/logout">登出</a></li>
+						<% } %>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="container" class="container">
+
+		<% if (success) { %>
+		<div class="alert alert-success">
+			<%= success %>
+		</div>
+		<% } %>
+		<% if (error) { %>
+		<div class="alert alert-error">
+			<%= error %>
+		</div>
+		<% } %>
+		<%- body %>
+		<hr />
+		<footer>
+			<p><a href="http://weibo.com/u/2023715171/home?topnav=1&wvr=5" target="_blank">yuanzm</a> 2014</p>
+		</footer>
+	</div>
+</body>
+<script src="/javascripts/jquery.js"></script>
+<script src="/javascripts/bootstrap.js"></script>
+</html>
