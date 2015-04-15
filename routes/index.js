@@ -1,12 +1,11 @@
-var express = require('express');
-var router = express.Router();
-var crypto = require('crypto');
-var User = require('../models/user.js');
-var Post = require("../models/post.js");
+// 引入需要的模块
+var express = require('express'),
+ 	router = express.Router(),
+ 	crypto = require('crypto'),
+ 	User = require('../models/user.js'),
+ 	Post = require("../models/post.js");
 
-/* GET home page. */
-	
-
+// 主页路由
 router.get('/', function(req, res) {
 	Post.get(null, function(err, posts) {
 		if (err) {
@@ -22,6 +21,7 @@ router.get('/', function(req, res) {
 	});
 });
 
+// 注册页路由
 router.get("/reg",checkNotLogin);
 router.get("/reg",function(req,res) {
 	res.render("reg",{
@@ -65,6 +65,7 @@ router.post("/reg",function(req,res) {
 	});
 });
 
+// 登录页路由
 router.get("/login",checkNotLogin);
 router.get("/login",function(req,res) {
 	res.render("login",{
@@ -92,6 +93,7 @@ router.post("/login",function(req,res) {
 	});
 });
 
+// 登出页路由
 router.get("/logout",checkLogin);
 router.get("/logout",function(req,res) {
 	req.session.user = null;
@@ -115,7 +117,7 @@ function checkNotLogin(req, res, next) {
 	next();
 }
 
-
+// 发言路由
 router.post("/post",checkLogin);
 router.post("/post",function(req,res) {
 	var currentUser = req.session.user;

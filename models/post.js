@@ -1,5 +1,11 @@
 var mongodb = require('./db');
 
+/*
+ * 集合`posts`的文档`Post`构造函数
+ * @param {String} username: 发言人的名字
+ * @param {String} post: 发言内容
+ * @param {String} time: 发言时间
+ */
 function Post(username,post,time) {
 	this.user = username;
 	this.post = post;
@@ -13,8 +19,11 @@ function Post(username,post,time) {
 
 module.exports = Post;
 
+/*
+ * 保存一条发言到数据库
+ * @param {Function} callback: 执行完数据库操作的应该执行的回调函数
+ */
 Post.prototype.save = function save(callback) {
-
 	var post = {
 		user: this.user,
 		post: this.post,
@@ -30,9 +39,6 @@ Post.prototype.save = function save(callback) {
 				mongodb.close();
 				return callback(err);
 			}
-
-			// collection.ensureIndex('user');
-
 			collection.insert(post, {safe: true}, function(err, post) {
 				mongodb.close();
 				callback(err, post);
@@ -41,6 +47,11 @@ Post.prototype.save = function save(callback) {
 	});
 };
 
+/*
+ * 查询一个用户的所有发言
+ * @param {String} username: 需要查询的用户的名字 
+ * @param {Function} callback: 执行完数据库操作的应该执行的回调函数
+ */
 Post.get = function get(username, callback) {
 	mongodb.open(function(err, db) {
 		if (err) {
